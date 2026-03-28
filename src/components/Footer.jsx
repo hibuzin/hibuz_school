@@ -381,7 +381,7 @@ function Footer() {
             <span style={styles.bottomLink}>Privacy Policy</span>
             <span style={styles.bottomLink}>Terms & Conditions</span>
             <span style={styles.bottomLink}>
-              Designed by  <span style={styles.designedBy}>Hibuz</span>
+              Designed by <span style={styles.designedBy}>Hibuz</span>
             </span>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React from "react";
-import event1 from "../assets/event1.png"; // replace with your images
+import event1 from "../assets/event1.png";
 import event2 from "../assets/event2.png";
 import event3 from "../assets/event3.png";
 
@@ -7,7 +7,7 @@ function EventCard({ image, title, date, description }) {
   return (
     <div
       style={{
-        flex: "1 1 300px", // responsive width
+        flex: "1 1 300px",
         margin: "10px",
         borderRadius: "1px",
         overflow: "hidden",
@@ -27,7 +27,14 @@ function EventCard({ image, title, date, description }) {
           objectFit: "cover",
         }}
       />
-      <div style={{ padding: "15px", flex: "1", display: "flex", flexDirection: "column" }}>
+      <div
+        style={{
+          padding: "15px",
+          flex: "1",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
         <h3
           style={{
             fontSize: "18px",
@@ -42,8 +49,8 @@ function EventCard({ image, title, date, description }) {
           style={{
             fontSize: "14px",
             color: "#374151",
-            lineHeight: "1.8", // more readable line height
-            textAlign: "justify", // neat alignment
+            lineHeight: "1.8",
+            textAlign: "justify",
             marginBottom: "0",
           }}
         >
@@ -79,23 +86,64 @@ function EventList() {
   return (
     <div
       style={{
-        display: "flex",
-        flexWrap: "wrap",
-        justifyContent: "center",
-        padding: "20px",
+        padding: "40px 5px",
         maxWidth: "1200px",
         margin: "0 auto",
       }}
     >
-      {events.map((event, index) => (
-        <EventCard
-          key={index}
-          image={event.image}
-          title={event.title}
-          date={event.date}
-          description={event.description}
-        />
-      ))}
+      {/* Section Heading */}
+      <div
+        style={{
+          textAlign: "center",
+          marginBottom: "30px",
+          width: "100%",
+        }}
+      >
+        <h2
+          style={{
+            fontSize: "32px",
+            fontWeight: "700",
+            color: "#b89b3b",
+            marginBottom: "10px",
+            textTransform: "uppercase",
+            letterSpacing: "1px",
+            textAlign: "left",
+          }}
+        >
+         Events
+        </h2>
+
+        <p
+          style={{
+            fontSize: "15px",
+            color: "#6b7280",
+            maxWidth: "700px",
+            lineHeight: "1.7",
+            textAlign: "left",
+          }}
+        >
+          Stay updated with our latest school events, activities, and celebrations.
+        </p>
+      </div>
+
+      {/* Event Cards */}
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+        }}
+      >
+        {events.map((event, index) => (
+          <EventCard
+            key={index}
+            image={event.image}
+            title={event.title}
+            date={event.date}
+            description={event.description}
+          />
+        ))}
+      </div>
     </div>
   );
 }
