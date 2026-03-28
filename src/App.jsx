@@ -7,6 +7,7 @@ import SchoolIntro from "./components/SchoolIintro";
 import DirectorMessage from "./components/DirectorMessage";
 import StatsCounter from "./components/StatsCounter";
 import EventList from "./components/Even";
+import ReviewsMarquee from "./components/ReviewsMarquee";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
       <SchoolIntro/>
       <DirectorMessage/>
       <EventList/>
+      <ReviewsMarquee />
       <Footer/>
     </div>
   );

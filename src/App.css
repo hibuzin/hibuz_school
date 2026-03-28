@@ -1,6 +1,41 @@
-html, body, #root {
+/* Reset & Safe Layout */
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+html,
+body {
   width: 100%;
+  max-width: 100%;
   overflow-x: hidden;
+  font-family: 'Outfit', sans-serif;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Prevent images/videos from causing overflow */
+img,
+video,
+iframe {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Prevent long text from forcing horizontal scroll */
+h1, h2, h3, h4, h5, h6,
+p, span, a, div {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Optional: smooth scroll */
+html {
+  scroll-behavior: smooth;
 }

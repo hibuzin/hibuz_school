@@ -9,7 +9,7 @@ function EventCard({ image, title, date, description }) {
       style={{
         flex: "1 1 300px", // responsive width
         margin: "10px",
-        borderRadius: "12px",
+        borderRadius: "1px",
         overflow: "hidden",
         backgroundColor: "#f9fafb",
         boxShadow: "0 4px 12px rgba(0,0,0,0.05)",
