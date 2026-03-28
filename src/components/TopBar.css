@@ -261,76 +261,39 @@
   }
 
   /* 1st row in mobile = language + location */
-  .topbar-left {
-    order: 1;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 8px;
-    flex-wrap: nowrap;
-  }
+ .topbar-left {
+  display: none; /* mobile la full language section hide */
+}
 
-  .topbar-help {
-    display: none;
-  }
+.topbar-help {
+  display: none;
+}
 
-  .mobile-location {
-    display: flex;
-    justify-content: flex-end;
-    flex: 1;
-    font-size: 11px;
-    gap: 4px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
 
-  .desktop-location {
-    display: none;
-  }
 
-  /* 2nd row in mobile = logo center */
-  .topbar-center {
-    order: 2;
-    width: 100%;
-    justify-content: center;
-    gap: 6px;
-    flex-wrap: nowrap;
-  }
+.desktop-location {
+  display: none;
+}
 
-  .topbar-logo-img {
-    width: 36px;
-    height: 36px;
-  }
+/* 1st row in mobile = logo center only */
+.topbar-center {
+  order: 1;
+  width: 100%;
+  justify-content: center;
+  gap: 6px;
+  flex-wrap: nowrap;
+}
 
-  .topbar-school-name {
-    font-size: 14px;
-    letter-spacing: 0.02em;
-    max-width: 100%;
-  }
+.topbar-logo-img {
+  width: 36px;
+  height: 36px;
+}
 
-  .topbar-selected-display {
-    padding: 5px 24px 5px 4px;
-    font-size: 12px;
-  }
-
-  .topbar-flag {
-    font-size: 16px;
-  }
-
-  .topbar-lang-label {
-    display: none; /* only flag in mobile */
-  }
-
-  .topbar-dropdown {
-    min-width: 130px;
-  }
-
-  .topbar-dropdown-item {
-    font-size: 12px;
-    padding: 8px 10px;
-  }
+.topbar-school-name {
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  max-width: 100%;
+}
 }
 
 /* Extra small mobile */

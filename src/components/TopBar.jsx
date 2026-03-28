@@ -209,11 +209,9 @@ export default function TopBar() {
       ...styles.strip,
       padding: "6px 10px",
       height: "auto",
-      minHeight: "44px",
-      flexDirection: "column",
+      minHeight: "38px",
       justifyContent: "center",
       alignItems: "center",
-      gap: "6px",
     },
     links: {
       ...styles.links,
@@ -227,16 +225,6 @@ export default function TopBar() {
       padding: "0 4px",
       fontSize: "10px",
     },
-    socialWrap: {
-      ...styles.socialWrap,
-      justifyContent: "center",
-      gap: "12px",
-      width: "100%",
-    },
-    socialIcon: {
-      ...styles.socialIcon,
-      fontSize: "13px",
-    },
 
     main: {
       ...styles.main,
@@ -244,7 +232,7 @@ export default function TopBar() {
       flexDirection: "column",
       alignItems: "center",
       justifyContent: "center",
-      gap: "10px",
+      gap: "8px",
     },
 
     center: {
@@ -265,34 +253,6 @@ export default function TopBar() {
       textAlign: "center",
       lineHeight: 1.3,
     },
-
-    selectWrap: {
-      ...styles.selectWrap,
-      justifyContent: "center",
-    },
-    select: {
-      ...styles.select,
-      fontSize: "12px",
-      padding: "6px 24px 6px 8px",
-    },
-    flagText: {
-      ...styles.flagText,
-      fontSize: "14px",
-    },
-
-    right: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: "6px",
-      width: "100%",
-      fontSize: "12px",
-      fontWeight: "500",
-      color: "#4b5563",
-      whiteSpace: "normal",
-      textAlign: "center",
-      flexWrap: "wrap",
-    },
   };
 
   return (
@@ -302,56 +262,46 @@ export default function TopBar() {
         <div style={isMobile ? mobileStyles.links : styles.links}>
           {["STUDENT LOGIN", "STAFF LOGIN", "ALUMNI"].map((item, i, arr) => (
             <React.Fragment key={item}>
-              <span style={isMobile ? mobileStyles.link : styles.link}>{item}</span>
+              <span style={isMobile ? mobileStyles.link : styles.link}>
+                {item}
+              </span>
               {i < arr.length - 1 && <span style={styles.sep}>|</span>}
             </React.Fragment>
           ))}
         </div>
 
-        <div style={isMobile ? mobileStyles.socialWrap : styles.socialWrap}>
-          <a href="#" style={isMobile ? mobileStyles.socialIcon : styles.socialIcon} aria-label="Facebook">
-            <FaFacebookF />
-          </a>
-          <a href="#" style={isMobile ? mobileStyles.socialIcon : styles.socialIcon} aria-label="Instagram">
-            <FaInstagram />
-          </a>
-          <a href="#" style={isMobile ? mobileStyles.socialIcon : styles.socialIcon} aria-label="Twitter">
-            <FaTwitter />
-          </a>
-          <a href="#" style={isMobile ? mobileStyles.socialIcon : styles.socialIcon} aria-label="YouTube">
-            <FaYoutube />
-          </a>
-        </div>
+        {/* DESKTOP ONLY SOCIAL ICONS */}
+        {!isMobile && (
+          <div style={styles.socialWrap}>
+            <a href="#" style={styles.socialIcon} aria-label="Facebook">
+              <FaFacebookF />
+            </a>
+            <a href="#" style={styles.socialIcon} aria-label="Instagram">
+              <FaInstagram />
+            </a>
+            <a href="#" style={styles.socialIcon} aria-label="Twitter">
+              <FaTwitter />
+            </a>
+            <a href="#" style={styles.socialIcon} aria-label="YouTube">
+              <FaYoutube />
+            </a>
+          </div>
+        )}
       </div>
 
       {/* Main bar */}
       {isMobile ? (
-        // MOBILE ONLY LAYOUT
+        // MOBILE ONLY LAYOUT (ONLY LOGO + SCHOOL NAME)
         <div style={mobileStyles.main}>
-          {/* 1. Logo + School name */}
           <div style={mobileStyles.center}>
             <div style={styles.logoRing}>
-              <img src={schoolIcon} alt="School logo" style={mobileStyles.logoImg} />
+              <img
+                src={schoolIcon}
+                alt="School logo"
+                style={mobileStyles.logoImg}
+              />
             </div>
             <span style={mobileStyles.schoolName}>SANFORD PUBLIC SCHOOL</span>
-          </div>
-
-          {/* 2. Language selector (Need Help removed on mobile) */}
-          <div style={mobileStyles.selectWrap}>
-            <span style={mobileStyles.flagText}>🇬🇧</span>
-            <select style={mobileStyles.select}>
-              <option value="en">English</option>
-              <option value="fr">French</option>
-              <option value="es">Spanish</option>
-              <option value="de">German</option>
-            </select>
-            <SelectArrow />
-          </div>
-
-          {/* 3. Location */}
-          <div style={mobileStyles.right}>
-            <PinIcon />
-            Birmingham, United Kingdom
           </div>
         </div>
       ) : (
