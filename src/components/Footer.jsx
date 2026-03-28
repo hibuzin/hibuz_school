@@ -97,8 +97,8 @@ function Footer() {
               lineHeight: "1.7",
             }}
           >
-            <span>📍 123 School Road, Chennai, Tamil Nadu</span>
-            <span>📞 +91 98765 43210</span>
+            <span>📍 46, Silver street, Birmingham, UK</span>
+            <span>📞 +61 98765 43210</span>
             <span>✉️ info@publicschool.com</span>
             <span>🕒 Mon - Fri: 8:00 AM - 4:00 PM</span>
           </div>

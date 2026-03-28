@@ -4,22 +4,25 @@ import schoolVideo from "../assets/school-video.mp4";
 function SchoolIntro() {
   return (
     <section
-  style={{
-    width: "100%",
-    backgroundColor: "#ffffff",
-    padding: "60px 20px 0",
-  }}
->
-  <div
-    style={{
-      maxWidth: "1200px",
-      margin: "0 auto",
-      display: "grid",
-      gridTemplateColumns: "1fr 1fr",
-      gap: "40px",
-      alignItems: "center",
-    }}
-  >
+      style={{
+        width: "100%",
+        backgroundColor: "#ffffff",
+        padding: "60px 20px 0",
+        boxSizing: "border-box",
+      }}
+    >
+      <div
+        style={{
+          maxWidth: "1200px",
+          margin: "0 auto",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
+          gap: "40px",
+          alignItems: "start",
+          // Responsive for mobile
+          gridTemplateRows: "auto",
+        }}
+      >
         {/* Left Content */}
         <div>
           <p
@@ -37,7 +40,7 @@ function SchoolIntro() {
 
           <h2
             style={{
-              fontSize: "36px",
+              fontSize: "clamp(24px, 5vw, 36px)", // responsive font
               fontWeight: "700",
               color: "#0f172a",
               marginBottom: "18px",
@@ -50,7 +53,7 @@ function SchoolIntro() {
 
           <p
             style={{
-              fontSize: "16px",
+              fontSize: "clamp(14px, 2.5vw, 16px)", // responsive font
               color: "#475569",
               lineHeight: "1.9",
               marginBottom: "16px",
@@ -65,7 +68,7 @@ function SchoolIntro() {
 
           <p
             style={{
-              fontSize: "16px",
+              fontSize: "clamp(14px, 2.5vw, 16px)",
               color: "#475569",
               lineHeight: "1.9",
               marginBottom: "24px",
@@ -104,7 +107,7 @@ function SchoolIntro() {
         >
           <h3
             style={{
-              fontSize: "24px",
+              fontSize: "clamp(20px, 3vw, 24px)",
               fontWeight: "700",
               color: "#0f172a",
               marginBottom: "20px",
@@ -114,65 +117,88 @@ function SchoolIntro() {
           </h3>
 
           <div
-  style={{
-    display: "flex",
-    flexDirection: "column",
-    gap: "16px",
-  }}
->
-  <div style={{ fontSize: "15px", color: "#334155", lineHeight: "1.7", display: "flex", alignItems: "center", gap: "10px" }}>
-    <span style={{ color: "#ec8507", fontWeight: "700", fontSize: "16px" }}>✓</span>
-    <span>Experienced & Dedicated Faculty</span>
-  </div>
-
-  <div style={{ fontSize: "15px", color: "#334155", lineHeight: "1.7", display: "flex", alignItems: "center", gap: "10px" }}>
-    <span style={{ color: "#ec8507", fontWeight: "700", fontSize: "16px" }}>✓</span>
-    <span>Modern Smart Classrooms</span>
-  </div>
-
-  <div style={{ fontSize: "15px", color: "#334155", lineHeight: "1.7", display: "flex", alignItems: "center", gap: "10px" }}>
-    <span style={{ color: "#ec8507", fontWeight: "700", fontSize: "16px" }}>✓</span>
-    <span>Focus on Academics & Discipline</span>
-  </div>
-
-  <div style={{ fontSize: "15px", color: "#334155", lineHeight: "1.7", display: "flex", alignItems: "center", gap: "10px" }}>
-    <span style={{ color: "#ec8507", fontWeight: "700", fontSize: "16px" }}>✓</span>
-    <span>Sports, Arts & Co-Curricular Activities</span>
-  </div>
-
-  <div style={{ fontSize: "15px", color: "#334155", lineHeight: "1.7", display: "flex", alignItems: "center", gap: "10px" }}>
-    <span style={{ color: "#ec8507", fontWeight: "700", fontSize: "16px" }}>✓</span>
-    <span>Safe & Student-Friendly Campus</span>
-  </div>
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "16px",
+            }}
+          >
+            {[
+              "Experienced & Dedicated Faculty",
+              "Modern Smart Classrooms",
+              "Focus on Academics & Discipline",
+              "Sports, Arts & Co-Curricular Activities",
+              "Safe & Student-Friendly Campus",
+            ].map((item, idx) => (
+              <div
+                key={idx}
+                style={{
+                  fontSize: "clamp(14px, 2vw, 15px)",
+                  color: "#334155",
+                  lineHeight: "1.7",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
+                }}
+              >
+                <span
+                  style={{
+                    color: "#ec8507",
+                    fontWeight: "700",
+                    fontSize: "16px",
+                  }}
+                >
+                  ✓
+                </span>
+                <span>{item}</span>
+              </div>
+            ))}
           </div>
         </div>
-         </div>
-{/* Bottom School Video */}
-<div
+      </div>
+
+      {/* Bottom School Video */}
+      <div
   style={{
-    width: "calc(100% + 40px)",
+    width: "100vw", // full viewport width
+    position: "relative",
+    left: "50%",
+    right: "50%",
+    marginLeft: "-50vw",
+    marginRight: "-50vw",
     marginTop: "40px",
-    marginLeft: "-20px",
-    marginRight: "-20px",
     overflow: "hidden",
   }}
 >
   <video
     src={schoolVideo}
     muted
-  autoPlay
-  loop
-  playsInline
-
+    autoPlay
+    loop
+    playsInline
     style={{
       width: "100%",
-      height: "620px",
+      height: "auto", // responsive height
+      maxHeight: "620px", // desktop look
       objectFit: "cover",
       display: "block",
     }}
   />
 </div>
-</section>
+
+      {/* Media Query for Mobile */}
+      <style>
+        {`
+          @media (max-width: 968px) {
+            div[style*="grid-template-columns"] {
+              display: flex !important;
+              flex-direction: column !important;
+              gap: 20px !important;
+            }
+          }
+        `}
+      </style>
+    </section>
   );
 }
 

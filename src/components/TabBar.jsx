@@ -1,46 +1,69 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function TabBar() {
   const announcementText =
     "Admissions Open for 2026-27 | Annual Day Celebration on April 15 | Parent-Teacher Meeting This Saturday | Summer Camp Registrations Now Open | Mid-Term Exams Start from May 10 | School Reopens on June 3 | Science Exhibition on July 12 | Inter-School Sports Meet Registrations Open | Scholarship Test Applications Available Now | Kindergarten Orientation Program Next Monday | Independence Day Celebration Preparations Begin | New Library Books Added for Senior Students";
 
+  const menuRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  useEffect(() => {
+    if (isMobile && menuRef.current) {
+      menuRef.current.scrollLeft = 0; // scroll to start only on mobile
+    }
+  }, [isMobile]);
+
+  const menuItems = [
+    "HOME",
+    "ABOUT",
+    "ACADEMICS",
+    "ADMISSIONS",
+    "FACILITIES",
+    "EVENTS",
+    "ACHIEVEMENTS",
+    "CONTACT",
+    "CAREERS",
+  ];
+
   return (
-    <div style={{ width: "100%",  overflowX: "hidden" }}>
+    <div style={{ width: "100%", overflowX: "hidden" }}>
       {/* Premium Tab Bar */}
       <div
+        ref={menuRef}
         style={{
           display: "flex",
-          justifyContent: "center",
+          justifyContent: isMobile ? "flex-start" : "center", // left on mobile, center on desktop
           alignItems: "center",
           gap: "10px",
           backgroundColor: "#ffffff",
           padding: "2px 0",
-          borderTop: "none",
-          borderBottom: "none",
           boxShadow: "0 2px 10px rgba(0, 0, 0, 0.04)",
-          position: "relative",
+          overflowX: isMobile ? "auto" : "hidden", // scroll only on mobile
+          scrollbarWidth: "none",
         }}
       >
-        {[ "HOME",
-  "ABOUT",
-  "ACADEMICS",
-  "ADMISSIONS",
-  "FACILITIES",
-  "EVENTS",
-  "ACHIEVEMENTS",
-  "CONTACT",
-  "CAREERS"].map((item) => (
+        {menuItems.map((item) => (
           <span
             key={item}
             style={{
               cursor: "pointer",
-              fontWeight: "600",
-              fontSize: "13px",
+              fontWeight: 600,
+              fontSize: "clamp(12px, 2vw, 13px)",
               color: "#111827",
               letterSpacing: "0.3px",
               transition: "all 0.3s ease",
               padding: "2px 10px 10px",
               borderRadius: "6px",
+              whiteSpace: "nowrap",
+              fontFamily:
+                '"Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
             }}
           >
             {item}
@@ -48,7 +71,7 @@ function TabBar() {
         ))}
       </div>
 
-      {/* Premium Announcement Bar */}
+      {/* Announcement Bar */}
       <div
         style={{
           width: "100%",
@@ -74,7 +97,7 @@ function TabBar() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            fontSize: "13px",
+            fontSize: "clamp(11px, 2vw, 13px)",
             fontWeight: "700",
             letterSpacing: "1px",
             textTransform: "uppercase",
@@ -85,7 +108,7 @@ function TabBar() {
           Announcements
         </div>
 
-        {/* Marquee Wrapper */}
+        {/* Marquee */}
         <div
           style={{
             flex: 1,
@@ -99,7 +122,7 @@ function TabBar() {
               alignItems: "center",
               whiteSpace: "nowrap",
               color: "#1e293b",
-              fontSize: "14px",
+              fontSize: "clamp(12px, 2vw, 14px)",
               fontWeight: "500",
               letterSpacing: "0.2px",
               animation: "premiumMarquee 40s linear infinite",
@@ -115,12 +138,13 @@ function TabBar() {
       <style>
         {`
           @keyframes premiumMarquee {
-            0% {
-              transform: translateX(0);
-            }
-            100% {
-              transform: translateX(-50%);
-            }
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+
+          /* Hide scrollbar for Chrome, Safari, Edge */
+          div[style*="overflow-x: auto"]::-webkit-scrollbar {
+            display: none;
           }
         `}
       </style>

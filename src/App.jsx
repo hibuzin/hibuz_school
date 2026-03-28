@@ -4,6 +4,9 @@ import TabBar from "./components/TabBar";
 import Banner from "./components/Banner";
 import Footer from "./components/Footer";
 import SchoolIntro from "./components/SchoolIintro";
+import DirectorMessage from "./components/DirectorMessage";
+import StatsCounter from "./components/StatsCounter";
+import EventList from "./components/Even";
 
 function App() {
   return (
@@ -12,6 +15,8 @@ function App() {
       <TabBar />
       <Banner/>
       <SchoolIntro/>
+      <DirectorMessage/>
+      <EventList/>
       <Footer/>
     </div>
   );

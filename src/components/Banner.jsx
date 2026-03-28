@@ -6,7 +6,8 @@ function Banner() {
     <div
       style={{
         width: "100%",
-        height: "400px",
+        aspectRatio: "16 / 5", // maintains banner proportion
+        minHeight: "200px",    // ensures mobile doesn't shrink too much
         backgroundImage: `url(${bannerImg})`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
