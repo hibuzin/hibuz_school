@@ -159,8 +159,11 @@ function SchoolIntro() {
 >
   <video
     src={schoolVideo}
-    autoPlay
-    loop
+    muted
+  autoPlay
+  loop
+  playsInline
+
     style={{
       width: "100%",
       height: "620px",
