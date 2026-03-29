@@ -360,7 +360,7 @@ function Footer() {
             <div style={styles.infoCard}>
               {[
                 "Admissions Open for 2026 - 2027",
-                "CBSE Curriculum with Smart Classrooms",
+                "INTL Curriculum with Smart Classrooms",
                 "Safe Campus & Transport Facility",
                 "Experienced Faculty & Activity-Based Learning",
               ].map((item) => (
