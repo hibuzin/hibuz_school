@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import schoolIcon from "../assets/icon1.png";
+import ukFlag from "../assets/uk.png";
+import frFlag from "../assets/fr.png";
+import esFlag from "../assets/es.png";
+import deFlag from "../assets/de.png";
 import {
   FaFacebookF,
   FaInstagram,
@@ -7,13 +11,99 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 
+// ── Language data ──────────────────────────────────────────────
+const LANGUAGES = [
+  { code: "en", flag: ukFlag, label: "English" },
+  { code: "fr", flag: frFlag, label: "French" },
+  { code: "es", flag: esFlag, label: "Spanish" },
+  { code: "de", flag: deFlag, label: "German" },
+];
+
+// ── Reusable Flag Dropdown (used in BOTH desktop & mobile) ─────
+function LangSelect() {
+  const [open, setOpen] = useState(false);
+  const [selected, setSelected] = useState(LANGUAGES[0]);
+
+  return (
+    <div style={{ position: "relative" }}>
+      {/* Trigger */}
+      <div
+        onClick={() => setOpen(!open)}
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "6px",
+          cursor: "pointer",
+          fontSize: "13px",
+          fontWeight: "500",
+          color: "#1a1a1a",
+          padding: "4px 6px",
+          userSelect: "none",
+        }}
+      >
+        <img
+          src={selected.flag}
+          alt={selected.label}
+          style={{ width: "22px", height: "15px", objectFit: "cover", borderRadius: "2px" }}
+        />
+        <span>{selected.label}</span>
+        <span style={{
+          width: 0, height: 0,
+          borderLeft: "4px solid transparent",
+          borderRight: "4px solid transparent",
+          borderTop: "5px solid #b89b3b",
+          marginLeft: "2px",
+        }} />
+      </div>
+
+      {/* Dropdown */}
+      {open && (
+        <div style={{
+          position: "absolute",
+          top: "110%",
+          left: 0,
+          backgroundColor: "#fff",
+          border: "1px solid #e5e0d0",
+          borderRadius: "6px",
+          boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
+          zIndex: 999,
+          minWidth: "130px",
+          overflow: "hidden",
+        }}>
+          {LANGUAGES.map((lang) => (
+            <div
+              key={lang.code}
+              onClick={() => { setSelected(lang); setOpen(false); }}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "8px 12px",
+                fontSize: "13px",
+                cursor: "pointer",
+                backgroundColor: selected.code === lang.code ? "#fdf6e3" : "#fff",
+              }}
+            >
+              <img
+                src={lang.flag}
+                alt={lang.label}
+                style={{ width: "22px", height: "15px", objectFit: "cover", borderRadius: "2px" }}
+              />
+              <span>{lang.label}</span>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ── Styles ─────────────────────────────────────────────────────
 const styles = {
   root: {
     fontFamily: "'Outfit', sans-serif",
     width: "100%",
   },
-
-  // ── Gold strip (Desktop default) ──────────────────────────────
   strip: {
     backgroundColor: "#b89b3b",
     color: "#fff",
@@ -43,8 +133,6 @@ const styles = {
     opacity: 0.4,
     fontSize: "11px",
   },
-
-  // ── Main bar (Desktop default) ────────────────────────────────
   main: {
     display: "flex",
     alignItems: "center",
@@ -55,32 +143,12 @@ const styles = {
     flexWrap: "wrap",
     boxSizing: "border-box",
   },
-
-  // Left
   left: {
     display: "flex",
     alignItems: "center",
     gap: "14px",
     flex: "1 1 160px",
     minWidth: 0,
-  },
-  selectWrap: {
-    position: "relative",
-    display: "flex",
-    alignItems: "center",
-  },
-  select: {
-    fontFamily: "'Outfit', sans-serif",
-    fontSize: "13px",
-    fontWeight: "500",
-    color: "#1a1a1a",
-    background: "transparent",
-    border: "none",
-    padding: "6px 28px 6px 10px",
-    cursor: "pointer",
-    outline: "none",
-    appearance: "none",
-    WebkitAppearance: "none",
   },
   help: {
     fontSize: "13px",
@@ -91,8 +159,6 @@ const styles = {
     textDecoration: "none",
     borderBottom: "1px solid transparent",
   },
-
-  // Center
   center: {
     display: "flex",
     alignItems: "center",
@@ -101,7 +167,6 @@ const styles = {
     flex: "2 1 220px",
     textAlign: "center",
   },
-
   logoImg: {
     width: "44px",
     height: "44px",
@@ -115,8 +180,6 @@ const styles = {
     letterSpacing: "0.04em",
     lineHeight: 1.2,
   },
-
-  // Right
   right: {
     display: "flex",
     alignItems: "center",
@@ -129,7 +192,6 @@ const styles = {
     minWidth: 0,
     whiteSpace: "nowrap",
   },
-
   socialWrap: {
     display: "flex",
     alignItems: "center",
@@ -137,7 +199,6 @@ const styles = {
     flexWrap: "nowrap",
     flexShrink: 0,
   },
-
   socialIcon: {
     color: "#ffffff",
     fontSize: "14px",
@@ -149,15 +210,6 @@ const styles = {
     textDecoration: "none",
     flexShrink: 0,
   },
-
-  flagText: {
-    fontSize: "16px",
-    marginRight: "6px",
-    display: "flex",
-    alignItems: "center",
-    lineHeight: 1,
-  },
-
   logoRing: {
     display: "flex",
     alignItems: "center",
@@ -165,33 +217,8 @@ const styles = {
   },
 };
 
-// Inline chevron arrow for select
-const SelectArrow = () => (
-  <span
-    style={{
-      position: "absolute",
-      right: "9px",
-      top: "50%",
-      transform: "translateY(-50%)",
-      width: 0,
-      height: 0,
-      borderLeft: "4px solid transparent",
-      borderRight: "4px solid transparent",
-      borderTop: "5px solid #b89b3b",
-      pointerEvents: "none",
-    }}
-  />
-);
-
-// Pin icon
 const PinIcon = () => (
-  <svg
-    width="14"
-    height="14"
-    viewBox="0 0 14 14"
-    fill="none"
-    style={{ flexShrink: 0 }}
-  >
+  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
     <path
       d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4z"
       fill="#b89b3b"
@@ -200,10 +227,16 @@ const PinIcon = () => (
   </svg>
 );
 
+// ── Main Component ─────────────────────────────────────────────
 export default function TopBar() {
-  const isMobile = window.innerWidth <= 768;
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
 
-  // Mobile styles only
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   const mobileStyles = {
     strip: {
       ...styles.strip,
@@ -225,23 +258,6 @@ export default function TopBar() {
       padding: "0 4px",
       fontSize: "10px",
     },
-
-    main: {
-      ...styles.main,
-      padding: "12px 10px",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: "8px",
-    },
-
-    center: {
-      ...styles.center,
-      width: "100%",
-      flexDirection: "column",
-      gap: "6px",
-      flex: "unset",
-    },
     logoImg: {
       ...styles.logoImg,
       width: "38px",
@@ -250,79 +266,69 @@ export default function TopBar() {
     schoolName: {
       ...styles.schoolName,
       fontSize: "14px",
-      textAlign: "center",
       lineHeight: 1.3,
     },
   };
 
   return (
     <div style={styles.root}>
-      {/* Gold strip */}
+
+      {/* ── Gold strip ── */}
       <div style={isMobile ? mobileStyles.strip : styles.strip}>
         <div style={isMobile ? mobileStyles.links : styles.links}>
           {["STUDENT LOGIN", "STAFF LOGIN", "ALUMNI"].map((item, i, arr) => (
             <React.Fragment key={item}>
-              <span style={isMobile ? mobileStyles.link : styles.link}>
-                {item}
-              </span>
+              <span style={isMobile ? mobileStyles.link : styles.link}>{item}</span>
               {i < arr.length - 1 && <span style={styles.sep}>|</span>}
             </React.Fragment>
           ))}
         </div>
 
-        {/* DESKTOP ONLY SOCIAL ICONS */}
+        {/* Desktop only social icons */}
         {!isMobile && (
           <div style={styles.socialWrap}>
-            <a href="#" style={styles.socialIcon} aria-label="Facebook">
-              <FaFacebookF />
-            </a>
-            <a href="#" style={styles.socialIcon} aria-label="Instagram">
-              <FaInstagram />
-            </a>
-            <a href="#" style={styles.socialIcon} aria-label="Twitter">
-              <FaTwitter />
-            </a>
-            <a href="#" style={styles.socialIcon} aria-label="YouTube">
-              <FaYoutube />
-            </a>
+            <a href="#" style={styles.socialIcon} aria-label="Facebook"><FaFacebookF /></a>
+            <a href="#" style={styles.socialIcon} aria-label="Instagram"><FaInstagram /></a>
+            <a href="#" style={styles.socialIcon} aria-label="Twitter"><FaTwitter /></a>
+            <a href="#" style={styles.socialIcon} aria-label="YouTube"><FaYoutube /></a>
           </div>
         )}
       </div>
 
-      {/* Main bar */}
+      {/* ── Main bar ── */}
       {isMobile ? (
-        // MOBILE ONLY LAYOUT (ONLY LOGO + SCHOOL NAME)
-        <div style={mobileStyles.main}>
-          <div style={mobileStyles.center}>
+        // MOBILE
+        <div style={{ ...styles.main, flexDirection: "column", alignItems: "stretch", padding: "12px 10px" }}>
+
+          {/* Row 1: Logo + School Name */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", marginBottom: "2px" }}>
             <div style={styles.logoRing}>
-              <img
-                src={schoolIcon}
-                alt="School logo"
-                style={mobileStyles.logoImg}
-              />
+              <img src={schoolIcon} alt="School logo" style={mobileStyles.logoImg} />
             </div>
             <span style={mobileStyles.schoolName}>SANFORD PUBLIC SCHOOL</span>
           </div>
+
+          {/* Row 2: Flag dropdown left, Location right */}
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", padding: "0 4px" }}>
+            <LangSelect />
+            <div style={{ display: "flex", alignItems: "center", gap: "4px", fontSize: "12px", fontWeight: "500", color: "#4b5563", whiteSpace: "nowrap" }}>
+              <PinIcon />
+              Birmingham, UK
+            </div>
+          </div>
+
         </div>
       ) : (
-        // DESKTOP LAYOUT (UNCHANGED)
+        // DESKTOP
         <div style={styles.main}>
-          {/* Left — language + help */}
+
+          {/* Left: Flag dropdown + Help */}
           <div style={styles.left}>
-            <div style={styles.selectWrap}>
-              <span style={styles.flagText}>🇬🇧</span>
-              <select style={styles.select}>
-                <option value="en">English</option>
-                <option value="fr">French</option>
-                <option value="es">Spanish</option>
-                <option value="de">German</option>
-              </select>
-              <SelectArrow />
-            </div>
+            <LangSelect />
             <span style={styles.help}>Need Help?</span>
           </div>
 
-          {/* Center — logo + school name */}
+          {/* Center: Logo + School name */}
           <div style={styles.center}>
             <div style={styles.logoRing}>
               <img src={schoolIcon} alt="School logo" style={styles.logoImg} />
@@ -330,13 +336,15 @@ export default function TopBar() {
             <span style={styles.schoolName}>SANFORD PUBLIC SCHOOL</span>
           </div>
 
-          {/* Right — location */}
+          {/* Right: Location */}
           <div style={styles.right}>
             <PinIcon />
             Birmingham, United Kingdom
           </div>
+
         </div>
       )}
+
     </div>
   );
 }
