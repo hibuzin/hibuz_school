@@ -8,6 +8,7 @@ import DirectorMessage from "./components/DirectorMessage";
 import StatsCounter from "./components/StatsCounter";
 import EventList from "./components/Even";
 import ReviewsMarquee from "./components/ReviewsMarquee";
+import TrackBus from "./components/track_bus";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <SchoolIntro/>
       <DirectorMessage/>
       <EventList/>
+      <TrackBus /> 
       <ReviewsMarquee />
       <Footer/>
     </div>

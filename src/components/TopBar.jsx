@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import schoolIcon from "../assets/icon1.png";
+import schoolIcon from "../assets/icon4.jpeg";
 import ukFlag from "../assets/uk.png";
 import frFlag from "../assets/fr.png";
 import esFlag from "../assets/es.png";
@@ -13,10 +13,10 @@ import {
 
 // ── Language data ──────────────────────────────────────────────
 const LANGUAGES = [
-  { code: "en", flag: ukFlag, label: "English" },
-  { code: "fr", flag: frFlag, label: "French" },
-  { code: "es", flag: esFlag, label: "Spanish" },
-  { code: "de", flag: deFlag, label: "German" },
+  { code: "en", flag: ukFlag, label: "ENGLISH" },
+  { code: "fr", flag: frFlag, label: "FRENCH" },
+  { code: "es", flag: esFlag, label: "SPANISH" },
+  { code: "de", flag: deFlag, label: "GERMAN" },
 ];
 
 // ── Reusable Flag Dropdown (used in BOTH desktop & mobile) ─────
@@ -168,8 +168,8 @@ const styles = {
     textAlign: "center",
   },
   logoImg: {
-    width: "44px",
-    height: "44px",
+    width: "30px",
+    height: "30px",
     objectFit: "contain",
     flexShrink: 0,
   },
@@ -218,7 +218,7 @@ const styles = {
 };
 
 const PinIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
+  <svg width="16" height="19" viewBox="0 0 14 14" fill="none" style={{ flexShrink: 0 }}>
     <path
       d="M7 1C4.79 1 3 2.79 3 5c0 3.25 4 8 4 8s4-4.75 4-8c0-2.21-1.79-4-4-4z"
       fill="#b89b3b"
@@ -276,7 +276,7 @@ export default function TopBar() {
       {/* ── Gold strip ── */}
       <div style={isMobile ? mobileStyles.strip : styles.strip}>
         <div style={isMobile ? mobileStyles.links : styles.links}>
-          {["STUDENT LOGIN", "STAFF LOGIN", "ALUMNI"].map((item, i, arr) => (
+          {["STUDENT LOGIN", "STAFF LOGIN", "ALUMNI" , "PAYMENT"].map((item, i, arr) => (
             <React.Fragment key={item}>
               <span style={isMobile ? mobileStyles.link : styles.link}>{item}</span>
               {i < arr.length - 1 && <span style={styles.sep}>|</span>}
@@ -298,14 +298,16 @@ export default function TopBar() {
       {/* ── Main bar ── */}
       {isMobile ? (
         // MOBILE
-        <div style={{ ...styles.main, flexDirection: "column", alignItems: "stretch", padding: "12px 10px" }}>
+        <div style={{ ...styles.main, flexDirection: "column", alignItems: "stretch", padding: "8px 10px", gap: "2px" }}>
 
           {/* Row 1: Logo + School Name */}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "8px", marginBottom: "2px" }}>
             <div style={styles.logoRing}>
               <img src={schoolIcon} alt="School logo" style={mobileStyles.logoImg} />
             </div>
-            <span style={mobileStyles.schoolName}>SANFORD PUBLIC SCHOOL</span>
+           <span style={{ ...mobileStyles.schoolName, fontSize: "20px" }}>
+  SANFORD ELITE SCHOOL
+</span>
           </div>
 
           {/* Row 2: Flag dropdown left, Location right */}
@@ -313,7 +315,7 @@ export default function TopBar() {
             <LangSelect />
             <div style={{ display: "flex", alignItems: "center", gap: "4px", fontSize: "12px", fontWeight: "500", color: "#4b5563", whiteSpace: "nowrap" }}>
               <PinIcon />
-              Birmingham, UK
+              BIRMINGHAM, UK
             </div>
           </div>
 
@@ -325,7 +327,7 @@ export default function TopBar() {
           {/* Left: Flag dropdown + Help */}
           <div style={styles.left}>
             <LangSelect />
-            <span style={styles.help}>Need Help?</span>
+            <span style={styles.help}>NEED HELP?</span>
           </div>
 
           {/* Center: Logo + School name */}
@@ -333,14 +335,19 @@ export default function TopBar() {
             <div style={styles.logoRing}>
               <img src={schoolIcon} alt="School logo" style={styles.logoImg} />
             </div>
-            <span style={styles.schoolName}>SANFORD PUBLIC SCHOOL</span>
+            <span style={{ ...styles.schoolName, fontSize: "22px" }}>
+  SANFORD ELITE SCHOOL
+</span>
           </div>
 
           {/* Right: Location */}
-          <div style={styles.right}>
-            <PinIcon />
-            Birmingham, United Kingdom
-          </div>
+<div style={{ 
+  ...styles.right, 
+  color: "#4b5563"   // keep the same color
+}}>
+  <PinIcon />
+  BIRMINGHAM, UNITED KINGDOM
+</div>
 
         </div>
       )}

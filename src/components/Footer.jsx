@@ -267,7 +267,7 @@ function Footer() {
           {/* Brand / About */}
           <div style={styles.brandWrap}>
             <h2 style={styles.brandTitle}>
-              Sanford <span style={styles.brandAccent}>Public School</span>
+              Sanford <span style={styles.brandAccent}>Elite School</span>
             </h2>
             <div style={styles.brandLine}></div>
 
@@ -331,14 +331,14 @@ function Footer() {
                 <div style={styles.contactIconWrap}>
                   <FaPhoneAlt size={12} />
                 </div>
-                <span>+61 98765 43210</span>
+                <span>+44 98765 43210</span>
               </div>
 
               <div style={styles.contactItem}>
                 <div style={styles.contactIconWrap}>
                   <FaEnvelope size={12} />
                 </div>
-                <span>info@sanfordpublicschool.com</span>
+                <span>info@sanfordeliteschool.com</span>
               </div>
 
               <div style={styles.contactItem}>
@@ -375,7 +375,7 @@ function Footer() {
 
         {/* Bottom Bar */}
         <div style={styles.bottomBar}>
-          <span>© 2026 Sanford Public School. All Rights Reserved.</span>
+          <span>© 2026 Sanford Elite School. All Rights Reserved.</span>
 
           <div style={styles.bottomLinks}>
             <span style={styles.bottomLink}>Privacy Policy</span>
