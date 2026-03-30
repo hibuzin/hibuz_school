@@ -7,7 +7,6 @@ import deFlag from "../assets/de.png";
 import {
   FaFacebookF,
   FaInstagram,
-  FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";

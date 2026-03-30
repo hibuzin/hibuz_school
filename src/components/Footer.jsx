@@ -10,6 +10,7 @@ import {
   FaClock,
   FaChevronRight,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 function Footer() {
   const isMobile = window.innerWidth <= 768;
@@ -285,7 +286,7 @@ function Footer() {
                 <FaInstagram />
               </a>
               <a href="#" style={styles.socialBtn} aria-label="Twitter">
-                <FaTwitter />
+                <FaXTwitter />
               </a>
               <a href="#" style={styles.socialBtn} aria-label="YouTube">
                 <FaYoutube />
