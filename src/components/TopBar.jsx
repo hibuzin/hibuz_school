@@ -10,6 +10,7 @@ import {
   FaTwitter,
   FaYoutube,
 } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 // ── Language data ──────────────────────────────────────────────
 const LANGUAGES = [
@@ -289,7 +290,7 @@ export default function TopBar() {
           <div style={styles.socialWrap}>
             <a href="#" style={styles.socialIcon} aria-label="Facebook"><FaFacebookF /></a>
             <a href="#" style={styles.socialIcon} aria-label="Instagram"><FaInstagram /></a>
-            <a href="#" style={styles.socialIcon} aria-label="Twitter"><FaTwitter /></a>
+            <a href="#" style={styles.socialIcon} aria-label="Twitter"><FaXTwitter /></a>
             <a href="#" style={styles.socialIcon} aria-label="YouTube"><FaYoutube /></a>
           </div>
         )}
